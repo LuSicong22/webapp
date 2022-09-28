@@ -35,14 +35,16 @@ const Home: NextPage = () => {
       return
     }
     const provider = new ethers.providers.Web3Provider(window.ethereum)
-    provider.send("eht_requestAccounts",[])
+
+    // MetaMask requires requesting permission to connect users accounts
+    provider.send("eth_requestAccounts", [])
     .then((accounts)=>{
       if(accounts.length>0) setCurrentAccount(accounts[0])
     })
     .catch((e)=>console.log(e))
   }
 
-  const onClickDisconnect = () =>{
+  const onClickDisconnect = () => {
     console.log("onClickDisConnect")
     setBalance(undefined)
     setCurrentAccount(undefined)
